@@ -15,8 +15,9 @@ def login_post():
     user = db.lerUser(email=email)
     if not user or user.password != password:
         flash('Please check your login details and try again.')
+        print("Login Failed")
         return render_template("tela-de-login.html")
-    return render_template("tela-logado")
+    print("Login Success")
 
 @app.route("/signup", methods=["POST", 'GET'])
 def signup():

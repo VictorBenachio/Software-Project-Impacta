@@ -1,11 +1,22 @@
-from flask import Flask, make_response, request, render_template, redirect, send_from_directory, session
+from flask import *
 import db
 
 app = Flask(__name__)
 
-@app.route("/signin", methods=['POST','GET'])
+@app.route("/signin")
 def login():
     return render_template("tela-de-login.html")
+
+...
+@auth.route('/signin', methods=['POST'])
+def login_post():
+    email = request.form.get('email')
+    password = request.form.get('password')
+    user = db.lerUser(email=email)
+    if not user or user.password != password:
+        flash('Please check your login details and try again.')
+        return render_template("tela-de-login.html")
+    return render_template("tela-logado")
 
 @app.route("/signup", methods=["POST", 'GET'])
 def signup():

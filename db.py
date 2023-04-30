@@ -10,15 +10,16 @@ def criarUser(name, birthday, email, password, gender):
     cursor.close()
     connection.close()
 
-def lerUser():
+def lerUser(email):
     connection = mysql.connector.connect(host='localhost', user='root', password='SistemaHabitos12!', database='habithis_db')
     cursor = connection.cursor()
-    command = 'SELECT * FROM user;'
+    command = f'SELECT * FROM user WHERE "email" = {email}'
     cursor.execute(command)
-    resultado = cursor.fetchall()
-    print(resultado)
+    result = cursor.fetchall()
+    print(result)
     cursor.close()
     connection.close()
+    return result
 
 def updateUser():
     connection = mysql.connector.connect(host='localhost', user='root', password='SistemaHabitos12!', database='habithis_db')
@@ -42,3 +43,6 @@ def deleteUser():
     cursor.close()
     connection.close()
 
+def login():
+    connection = mysql.connector.connect(host='localhost', user='root', password='SistemaHabitos12!', database='habithis_db')
+    cursor = connection.cursor()

@@ -46,3 +46,12 @@ def deleteUser():
 def login():
     connection = mysql.connector.connect(host='localhost', user='root', password='SistemaHabitos12!', database='habithis_db')
     cursor = connection.cursor()
+
+def createHabit(name):
+    connection = mysql.connector.connect(host='localhost', user='root', password='SistemaHabitos12!', database='habithis_db')
+    cursor = connection.cursor()
+    command = f'INSERT INTO habits (name) VALUES ("{name}")'
+    cursor.execute(command)
+    connection.commit()
+    cursor.close()
+    connection.close()

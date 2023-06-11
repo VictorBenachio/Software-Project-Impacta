@@ -40,7 +40,7 @@ def habit_get():
 def habit_post():
     name = request.form.get('input--new--habito')
 
-@app.route('/logout')
+@app.route('/logout', methods=['POST'])
 def logout():
     return render_template("tela-de-login.html")
 

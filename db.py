@@ -1,6 +1,5 @@
 from datetime import date
 import mysql.connector
-from models import User
 
 def criarUser(User):
     connection = mysql.connector.connect(host='localhost', user='root', password='SistemaHabitos12!', database='habithis_db')

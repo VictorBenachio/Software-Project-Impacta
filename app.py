@@ -1,7 +1,6 @@
 from flask import *
 import db
 from flask_login import login_user, logout_user
-from models import User
 
 app = Flask(__name__)
 
@@ -30,8 +29,7 @@ def signup():
         email = request.form.get("email")
         senha = request.form.get("senha")
         genero = request.form.get("genero")
-        user = User(name=nome, data_nascimento= data_nascimento, email=email, password=senha, gender=genero)
-        db.criarUser(user)
+        db.criarUser(name=nome, birthday=data_nascimento,email=email,password=senha,gender=genero)
     return render_template("formulario.html")
 
 @app.route('/habits', methods=['GET'])

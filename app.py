@@ -1,6 +1,6 @@
 from flask import *
 import db
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, LoginManager
 
 app = Flask(__name__)
 
@@ -42,9 +42,7 @@ def habit_post():
 
 @app.route('/logout')
 def logout():
-    logout_user()
-    return redirect(url_for('tela-de-login.html'))
-
+    return render_template("tela-de-login.html")
 
 
 if __name__ == "__main__":

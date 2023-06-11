@@ -1,10 +1,11 @@
 from datetime import date
 import mysql.connector
+from models import User
 
-def criarUser(name, birthday, email, password, gender):
+def criarUser(User):
     connection = mysql.connector.connect(host='localhost', user='root', password='SistemaHabitos12!', database='habithis_db')
     cursor = connection.cursor()
-    command = f'INSERT INTO user (NAME, BIRTHDAY, EMAIL, PASSWORD, GENDER) VALUES ("{name}", "{birthday}", "{email}", "{password}", "{gender}")'
+    command = f'INSERT INTO user (NAME, BIRTHDAY, EMAIL, PASSWORD, GENDER) VALUES ("{User.name}", "{User.birthday}", "{User.email}", "{User.password}", "{User.gender}")'
     cursor.execute(command)
     connection.commit()
     cursor.close()

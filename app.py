@@ -1,5 +1,7 @@
 from flask import *
 import db
+from flask_login import login_user, logout_user
+from models import User
 
 app = Flask(__name__)
 
@@ -16,7 +18,8 @@ def login_post():
     if not user or user.password != password:
         flash('Please check your login details and try again.')
         print("Login Failed")
-        return render_template("cadastro_habitos.html")
+        return render_template("tela-de-login.html")
+    login_user(user)
     print("Login Success")
 
 @app.route("/signup", methods=["POST", 'GET'])
@@ -27,8 +30,8 @@ def signup():
         email = request.form.get("email")
         senha = request.form.get("senha")
         genero = request.form.get("genero")
-        print(f'nome: {nome}\ndata nasc: {data_nascimento}\nemail: {email}\nsenha: {senha}\ngenero: {genero}')
-        db.criarUser(name=nome, birthday=data_nascimento,email=email,password=senha,gender=genero)
+        user = User(name=nome, data_nascimento= data_nascimento, email=email, password=senha, gender=genero)
+        db.criarUser(user)
     return render_template("formulario.html")
 
 @app.route('/habits', methods=['GET'])
@@ -39,7 +42,10 @@ def habit_get():
 def habit_post():
     name = request.form.get('input--new--habito')
 
-
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('tela-de-login.html'))
 
 
 
